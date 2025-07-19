@@ -1,21 +1,21 @@
-class Solution(object):
-    def compress(self, chars):
-        temp = []
-        read = 0
-        while read < len(chars):
-            current_char = chars[read]
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        write = 0
+        i = 0
+        n = len(chars)
+        while i < n:
+            current = chars[i]
             count = 0
-            while read < len(chars) and chars[read] == current_char:
+            while i < n and chars[i] == current:
                 count += 1
-                read += 1
+                i += 1
 
-            temp.append(current_char)
+            chars[write] = current
+            write += 1
+
             if count > 1:
-                count_str = str(count)
-                for digit in count_str:
-                    temp.append(digit)
-            
-        for i in range(len(temp)):
-                chars[i] = temp[i]
-                
-        return len(temp)
+                for digit in str(count):
+                    chars[write] = digit
+                    write += 1
+
+        return write
